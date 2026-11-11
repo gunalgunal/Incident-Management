@@ -1,0 +1,14 @@
+# Render Blueprint — one-click deploy for the free Web Service tier.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: incident-management
+    runtime: docker
+    plan: free            # 512 MB RAM; spins down after 15 min idle
+    region: oregon        # change if you are closer to another region
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: JAVA_OPTS
+        value: "-XX:MaxRAMPercentage=75 -XX:+ExitOnOutOfMemoryError"
